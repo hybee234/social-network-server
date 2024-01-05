@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const {
-    getUsers,
+    getAllUsers,
     getUser,
     postUser,
     putUser,
@@ -10,10 +10,11 @@ const {
 
 
 // /api/users
-// route to get users, get a single user, add a user, update user, and delete user
-router.route('/').get(getUsers).post(postUser)
+router.route('/').get(getAllUsers).post(postUser)
 
+// /api/users/:userId
 router.route('/:userId').get(getUser).put(putUser).delete(deleteUser)
+
 
 // //route to add and remove friends
 // router.route('/:userId/friends/:friendId').post(addFriend).delete(removeFriend)

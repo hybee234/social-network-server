@@ -11,10 +11,7 @@ const userSchema = new Schema(
         email: {
             type: String,
             required: true,
-            unique: true,
-            // validate: function(v) {
-            //     return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(v)
-            // },
+            unique: [true, 'email already exists'],
             match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, "Please Enter a valid Email Address"]
 
         },
