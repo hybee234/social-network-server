@@ -28,6 +28,7 @@ const thoughtSchema = new Schema(
             virtuals: true,     
             getters: true,
         },
+        id: false, // passed back just the _id value
     }
 );
 

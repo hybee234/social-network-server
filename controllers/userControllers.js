@@ -1,8 +1,8 @@
 const { User, Thought } = require('../models');
 
-const userControllers = {
+module.exports = { 
 
-    async getUsers (req, res) {
+    async getAllUsers (req, res) {
         try {
             const getAllUsers = await User.find({})
             .select('-__v')
@@ -16,7 +16,13 @@ const userControllers = {
     async getUser (req, res) {
         try {
             const getOneUser = await User.find({_id: req.params.userId})
-            .select('-__v')
+            .populate({ path: 'thoughts', select: '-__v' })
+            .populate({ path: 'friends', select: '-__v' })
+
+            if (!getOneUser) {
+                return res.status(404).json({ message: 'No user with that ID' });
+            }
+
             res.json(getOneUser)
         } catch (err) {
             console.log(err)
@@ -69,5 +75,3 @@ const userControllers = {
         }
     },
 }
-
-module.exports = userControllers
