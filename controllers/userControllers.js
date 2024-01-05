@@ -5,7 +5,7 @@ module.exports = {
     async getAllUsers (req, res) {
         try {
             const getAllUsers = await User.find({})
-            .select('-__v')
+            .select('-__v');  // deselect version column from response
             res.json(getAllUsers)
         } catch (err) {
             console.log(err)
@@ -18,9 +18,10 @@ module.exports = {
             const getOneUser = await User.find({_id: req.params.userId})
             .populate({ path: 'thoughts', select: '-__v' })
             .populate({ path: 'friends', select: '-__v' })
+            .select('-__v');  // deselect version column from response
 
             if (!getOneUser) {
-                return res.status(404).json({ message: 'No user with that ID' });
+                return res.status(404).json({ message: 'User ID not found' });
             }
 
             res.json(getOneUser)
@@ -32,8 +33,13 @@ module.exports = {
 
     async postUser (req, res) {
         try {
-            const postOneUser = await User.create(req.body)
-            
+            const postOneUser = await User.create(req.body)            
+            .select('-__v');  // deselect version column from response
+
+            if (!postOneUser) {
+                return res.status(404).json({ message: 'Something went wrong' });                
+            }
+
             res.json(postOneUser)
         } catch (err) {
             console.log(err)
@@ -50,7 +56,7 @@ module.exports = {
             );
 
             if (!putOneUser) {
-                return res.status(404).json({ message: 'No user with that ID' });
+                return res.status(404).json({ message: 'User ID not found' });
             }
 
             res.json(putOneUser);
@@ -66,7 +72,7 @@ module.exports = {
             );
 
             if (!deleteOneUser) {
-                return res.status(404).json({ message: 'No user with that ID' });
+                return res.status(404).json({ message: 'User ID not found' });
             }
 
             res.json(deleteOneUser);
