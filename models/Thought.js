@@ -14,7 +14,7 @@ const thoughtSchema = new Schema(
             type: Date,
             default: Date.now,
             get: function(value) {
-                return value.toDateString()
+                return value.toLocaleString()
             }
         },
         username:{
@@ -38,6 +38,5 @@ thoughtSchema
 })
 
 const Thought = model('thought', thoughtSchema);
-const handleError = (err) => console.error(err);
 module.exports = Thought;
 

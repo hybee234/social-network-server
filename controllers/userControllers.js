@@ -81,4 +81,49 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+
+
+    async addFriend(req, res) {
+        try {
+            
+            const postOneFriend = await User.findOneAndUpdate( // Note that the parent document is a findOneAndUpdate
+                { _id: req.params.userId },
+                { $addToSet: { friends: req.params.friendId} },              // $addtoset adds a subdocument to the array
+                { new: true },
+            );
+
+            if (!postOneFriend) {
+                return res.status(404).json({
+                message: 'Friend created, but found no User with that ID',
+                })
+            }
+        
+            res.json({postOneFriend, message: 'Friend POSTED!'});
+        } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+        }
+    },
+
+    async removeFriend(req, res) {
+        try {
+            const deleteOneFriend = await User.findOneAndUpdate(   // Note that the parent document is a findOneAndUpdate
+                { _id: req.params.userId },                          // Find this user
+                { $pull: { friends: req.params.friendId}},       // $pull (deletes) the friend (subdocument)
+                { runValidators: true, new: true }
+            )
+            
+            if (!deleteOneFriend) {
+                return res.status(404).json({ message: 'No User with that ID' });
+            }
+
+            res.json({deleteOneFriend, message: 'Friend DELETED!' });
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+
+
+
+
 }
