@@ -5,7 +5,7 @@ module.exports = {
     async getAllThoughts (req, res) {
         try {
             const getAllThoughts = await Thought.find({})
-            .select('-__v');  // deselect version column from response
+            .select('-__v');  // remove document version from response
             
             res.json({getAllThoughts, messages: "All Thoughts RETRIEVED!"})
         } catch (err) {
@@ -17,7 +17,7 @@ module.exports = {
     async getThought (req, res) {
         try {
             const getOneThought = await Thought.findOne({_id: req.params.thoughtId})
-            .select('-__v');  // deselect version column from response
+            .select('-__v');  // remove document version from response
 
             if (!getOneThought) {
                 return res.status(404).json({ message: 'No thought with that ID' });                
@@ -40,8 +40,7 @@ module.exports = {
                 req.body.userId,                
                 { $addToSet: { thoughts: thought._id} },
                 { runValidators: true, new: true }
-            )
-            .select('-__v');  // deselect version column from response
+            );
     
             if (!postOneThought) {
                 return res.status(404).json({
@@ -62,8 +61,7 @@ module.exports = {
                 { _id: req.params.thoughtId },
                 { $set: req.body },
                 { runValidators: true, new: true }
-            )
-            .select('-__v');  // deselect version column from response
+            );
 
             if (!putOneThought) {
                 return res.status(404).json({ message: 'No thought with that ID' });
@@ -79,8 +77,7 @@ module.exports = {
         try {
             const deleteOneThought = await Thought.findOneAndDelete(
                 { _id: req.params.thoughtId },                
-            )
-            .select('-__v');  // deselect version column from response
+            );
 
             if (!deleteOneThought) {
                 return res.status(404).json({ message: 'No thought with that ID' });
@@ -99,9 +96,8 @@ module.exports = {
                 { _id: req.params.thoughtId },
                 { $addToSet: { reactions: req.body} },              // $addtoset adds a subdocument to the array
                 { new: true },
-            )
-            .select('-__v');  // deselect version column from response
-    
+            );
+
             if (!postOneReaction) {
                 return res.status(404).json({
                 message: 'Reaction created, but found no thought with that ID',
@@ -118,12 +114,11 @@ module.exports = {
     async deleteReaction(req, res) {
         try {
             const deleteOneReaction = await Thought.findOneAndUpdate(   // Note that the parent document is a findOneAndUpdate
-                { _id: req.params.thoughtId },
-                { $pull: { reactions: {_id: req.params.reactionId}}},  // $pull deletes the subdocument
+                { _id: req.params.thoughtId },                          // Find this thought
+                { $pull: { reactions: {_id: req.params.reactionId}}},   // $pull (deletes) the reaction (subdocument)
                 { runValidators: true, new: true }
             )
-            .select('-__v');  // deselect version column from response
-
+            
             if (!deleteOneReaction) {
                 return res.status(404).json({ message: 'No Reaction with that ID' });
             }
