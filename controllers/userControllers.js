@@ -71,12 +71,16 @@ module.exports = {
                 { _id: req.params.userId },                
             )
 
-
+            console.log (deleteOneUser)
             if (!deleteOneUser) {
                 return res.status(404).json({ message: 'User ID not found' });
+            } else {
+                //BONUS: remove a users associated thoughts when deleted//
+                console.log ("User ID found - assessing thoughts)")
+                const deleteAllThoughts = await Thought.deleteMany({ _id: { $in: deleteOneUser.thoughts }});
             }
 
-            res.json(deleteOneUser);
+            res.json({deleteOneUser, deleteAllThoughts, message: "User and Thoughts Deleted"});
         } catch (err) {
             res.status(500).json(err);
         }
