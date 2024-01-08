@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, Types } = require('mongoose');
 
 
 const reactionSchema = new Schema(
@@ -7,9 +7,6 @@ const reactionSchema = new Schema(
         reactionId: {
             type: Schema.Types.ObjectId,
             default: () => new Types.ObjectId(),
-            unique: true,
-            // type: String,
-            // required: true
         },
         reactionBody: {
             type: String,
@@ -27,12 +24,13 @@ const reactionSchema = new Schema(
                 return value.toLocaleString()
             }
         },
-    },
+    
+    },    
     {
         toJSON: {       
             getters: true,
         },
-        // id: false, // passed back just the _id value
+        _id: false, // passed back just the _id value
     }
 );
 

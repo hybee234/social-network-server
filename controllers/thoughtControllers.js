@@ -95,7 +95,7 @@ module.exports = {
             const postOneReaction = await Thought.findOneAndUpdate( // Note that the parent document is a findOneAndUpdate
                 { _id: req.params.thoughtId },
                 { $addToSet: { reactions: req.body} },              // $addtoset adds a subdocument to the array
-                { new: true },
+                { runValidators: true, new: true }
             );
 
             if (!postOneReaction) {
