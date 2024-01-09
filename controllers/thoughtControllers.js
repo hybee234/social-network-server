@@ -115,7 +115,7 @@ module.exports = {
         try {
             const deleteOneReaction = await Thought.findOneAndUpdate(   // Note that the parent document is a findOneAndUpdate
                 { _id: req.params.thoughtId },                          // Find this thought
-                { $pull: { reactions: {_id: req.params.reactionId}}},   // $pull (deletes) the reaction (subdocument)
+                { $pull: { reactions: {reactionId: req.params.reactionId}}},   // $pull (deletes) the reaction (subdocument)
                 { runValidators: true, new: true }
             )
             

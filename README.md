@@ -13,11 +13,8 @@ Week 18 NoSQL  Challenge
 [![MongoDB Badge](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Mongoose Badge](https://img.shields.io/badge/Mongoose-4EA94B?style=for-the-badge&logo=mongoose&logoColor=white)](https://mongoosejs.com/)
 
-
-
 Challenge 18 - No SQL (MongoDB)
 </div>
-
 
 ## Description
 
@@ -80,7 +77,7 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 
 ### Additional requirements:
 
-* Monogoose package must be used to connect to MongoDB database
+* Mongoose package must be used to connect to MongoDB database
 * Express JS package must be used for routing
 
 
@@ -144,8 +141,8 @@ Available APIs are as followeds
 Category POST/PUT sample JSON body:
 ```
 {
-	"username" : "test1",
-	"email" : "a@b.com"
+	"username" : "User123",
+	"email" : "User@email.com"
 }
 ```
 ** GET ONE user will also obtain detail information about thoughts and reactions
@@ -153,58 +150,38 @@ Category POST/PUT sample JSON body:
 
 *** UP TO HERE ***
 
-| Thoughts                  | API                                    | 
-| ------------------------- | -------------------------------------- | 
-| GET all Product:          | http://localhost:3001/api/products/    | 
-| GET one Product by ID:    | http://localhost:3001/api/products/:id | 
-| POST one Product          | http://localhost:3001/api/products/    |  
-| PUT one Product by ID:    | http://localhost:3001/api/products/:id |
-| DELETE one Product by ID: | http://localhost:3001/api/products/:id |
+| Thoughts                  | API                                    		| 
+| ------------------------- | --------------------------------------------- | 
+| GET all thoughts:         | http://localhost:3001/api/thoughts/           | 
+| GET one Thought by ID:    | http://localhost:3001/api/thoughts/:thoughtId | 
+| POST one Thought          | http://localhost:3001/api/thoughts/    		|  
+| PUT one Thought by ID:    | http://localhost:3001/api/thoughts/:thoughtId |
+| DELETE one Thought by ID: | http://localhost:3001/api/thoughts/:thoughtId |
 
-Product POST/PUT sample JSON body:
+Thought POST/PUT sample JSON body:
  ```
- {
-	"product_name": "basketball",
-	"price" : 30.00,
-	"stock" : 3,
-	"tagIds" : ["1", "2", "3", "4"]
- }
+{
+	"thoughtText" : "What a lovely day today",
+	"username" : "User123"
+}
  ```
 
-| Tags                  |                                    |
-| --------------------- | ---------------------------------- |
-| GET all Tag:          | http://localhost:3001/api/tags/    |
-| GET one Tag by ID:    | http://localhost:3001/api/tags/:id |
-| POST one Tag          | http://localhost:3001/api/tags/    |
-| PUT one Tag by ID:    | http://localhost:3001/api/tags/:id |
-| DELETE one Tag by ID: | http://localhost:3001/api/tags/:id |
+| Reactions                  | API                                                                 |
+| -------------------------- | ------------------------------------------------------------------- |
+| POST one Reaction     	 | http://localhost:3001/api/thoughts/:thoughtId/reactions/            |
+| DELETE one Reaction by ID: | http://localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId |
 
 Tag POST/PUT sample JSON body:
 ```
 {
-"tag_name" : "ball"
+	"reactionBody" : "This is a wonderful thought!",
+	"username" : "User234"
 }
 ```
-
-
-The below SQL can be used to pull table data across the 4 tables used in this server:
-```
---All values from all tables
-SELECT
-p.id as product_id,
-p.product_name,
-p.price,
-p.stock, 
-t.id as tag_id,
-t.tag_name,
-pt.id as producttag_id,
-c.id as category_id,
-c.category_name
-FROM product p
-LEFT JOIN product_tag pt on pt.product_id = p.id
-LEFT JOIN tag t on t.id = pt.tag_id
-LEFT JOIN category c ON p.category_id = c.id;
-```
+| Friends                    | API                                                       |
+| -------------------------- | --------------------------------------------------------- |
+| POST one Friend by ID      | http://localhost:3001/api/users/:userId/friends/:friendId |
+| DELETE one Reaction by ID: | http://localhost:3001/api/users/:userId/friends/:friendId |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
     
@@ -227,10 +204,6 @@ To contribute to this application, please reach out to me via my contact details
 ## Testing
 
 Automated Test scripts have not been developed for this application
-
-## Schema and Seeding
-* Validate that running the schema.sql file via mysql2 does not result in errors
-* Validate that running the index.js file within the seed folder does nto result in seed errors
 
 ### Categories
 
@@ -272,10 +245,10 @@ Automated Test scripts have not been developed for this application
 * Javascript
 * Node.js
 * Node Package Manager (NPM)
-* MySQL2
+* MongoDB
+* Mongoose
 * Express
-* Sequelize
-* dotenv
+* Insomnia
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
