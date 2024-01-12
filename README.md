@@ -1,10 +1,8 @@
-# social-network-server
-Week 18 NoSQL  Challenge
 <a ID="readme-top"></a>
 
 <div align="center">
 
-# Huber's Social Network Backend
+# Huber's Social Network Server
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge&logo=mit)](https://opensource.org/licenses/MIT)
 [![Node.js Badge](https://img.shields.io/badge/Node.js-393?style=for-the-badge&logo=nodedotjs&logoColor=fff)](https://nodejs.org/en)
@@ -18,28 +16,29 @@ Challenge 18 - No SQL (MongoDB)
 
 ## Description
 
-Huber's social network backend is a server designed on a MongoDB platform. Its purpose is to connect the front-end social network application
+Huber's social network server is designed on a MongoDB platform. Its purpose is to connect the front-end social network application
 
-High level features of the server are:
+High level features of the server are to support:
 
 * User management
-* Enabling users to express their thoughts on the platform
+* Enabling users to express their thoughts 
 * Enabling other users to respond to thoughts with reactions
 * Allowing users to connect and become friends with one another.
 
-This application has been developed without starting code
+This server has been developed without starting code
 
 ## Table of contents
 
-- <a href="#user-story">User Story</a>
-- <a href="#user-acceptance-criteria">User Acceptance Criteria</a>
+
+- [User Story](#user-story)
+- [User Acceptance Critieria](#user-acceptance-criteria)
 - [Installation](#installation)
 - [Usage](#usage)
-- <a href="#video-screenshots">Video and Screenshots</a>
+- [Video and Screenshots](#video-and-screenshots)
 - [License](#license)
 - [Contributing](#contributing)
 - [Testing](#testing)
-- <a href="#technologies-used">Technologies Used</a>
+- [Technologies Used](#technologies-used)
 - [Questions](#questions)
 
 ## User Story <a ID="user-story"></a>
@@ -55,7 +54,7 @@ SO THAT my website can handle large amounts of unstructured data
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## User Acceptance Criteria <a ID="user-acceptance-criteria"></a>
+## User Acceptance Criteria
 
 ### This server was developed with the below User acceptance criteria:
 
@@ -83,26 +82,31 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Video and Screenshots <a ID = "video-screenshots"></a>
+## Video and Screenshots
 
 ### Video
 
-Watch this video to learn more about the server
+Watch these two videos to learn more about the server
 
-<a href="https://drive.google.com/file/d/1h29d87JOBtMskNZp2F4yEOWwkikeE907/view"> Video - "How to: Huber's eCommerce Backend" </a>
+
+<a href="https://drive.google.com/file/d/15-dXXBq0_j8XdnSx6tYZehKxHfb6CfhM/view"> Video - "Huber's Social Network Server" (10:52 min) </a>
+
+<a href="https://drive.google.com/file/d/1Z0E57SvpZfY3E8IvAX_7hwZ1rNYaT_If/view"> Video - "Social Network Server - Delete thought when user is deleted" (1:02 min) </a>
+
+
 
 ### Screenshots
 
 Screenshot of response to a GET request for all categories
 <div align="center">
 
-![Screenshot of the response to GET all categories](./assets/images/screenshot1.png)
+![Screenshot of the response to GET all users](./src/images/screenshot1.png)
 </div>
 
 Screenshot of response to a GET request for all products
 <div align="center">
 
-![Screenshot of the response to GET all products](./assets/images/screenshot2.png)
+![Screenshot of the response to GET all thoughts](./src/images/screenshot2.png)
 </div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -162,7 +166,8 @@ Thought POST/PUT sample JSON body:
  ```
 {
 	"thoughtText" : "What a lovely day today",
-	"username" : "User123"
+	"username" : "User123",
+	"userId" : "659aba9d2cec9c8652e7b021"
 }
  ```
 
@@ -204,39 +209,6 @@ To contribute to this application, please reach out to me via my contact details
 ## Testing
 
 Automated Test scripts have not been developed for this application
-
-### Categories
-
-* Validate that GET all Category request returns all Categories and associated Products
-* Validate that GET one Category by ID returns a single Category and associated Products if the category ID exists
-* Validate that GET one Category by ID returns an error if the category ID does not exist
-* Validate that POST a Category adds a new record to the category table
-* Validate that PUT (Updating) a Category by ID  is reflected in the database for the same ID
-* Validate that PUT (Updating) a Category by ID  returns an error if the category ID does not exist
-* Validate that DELETING a Category by ID removes the category from the database
-* Validate that DELETING a Category by ID  returns an error if the ID does not exist
-
-### Products
-
-* Validate that GET all Product request returns all Products and associated Category and Tags
-* Validate that GET one Product by ID returns a single Products and associated Category and Tags if the Product ID exists
-* Validate that GET one Product by ID returns an error if the Product ID does not exist
-* Validate that POST a Product adds a new record to the product table and corresponding record entries on the ProducTag table for each tag associated 
-* Validate that PUT (Updating) a Product by ID  is reflected in the database for the same ID (including updating associated tags)
-* Validate that PUT (Updating) a Product by ID  returns an error if the Product ID does not exist
-* Validate that DELETING a Product by ID removes the Product from the database along with tag associations on the ProductTag table
-* Validate that DELETING a Product by ID  returns an error if the ID does not exist
-
-### Tags
-
-* Validate that GET all Tag request returns all Tags and associated Products
-* Validate that GET one Tag by ID returns a single Tag and associated Products if the Tag ID exists
-* Validate that GET one Tag by ID returns an error if the Tag ID does not exist
-* Validate that POST a Tag adds a new record to the product table 
-* Validate that PUT (Updating) a Tag by ID  is reflected in the database for the same ID
-* Validate that PUT (Updating) a Tag by ID  returns an error if the Product ID does not exist
-* Validate that DELETING a Tag by ID removes the Tag from the database along with tag associations on the ProductTag table
-* Validate that DELETING a Tag by ID  returns an error if the ID does not exist
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

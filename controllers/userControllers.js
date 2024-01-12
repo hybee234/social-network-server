@@ -70,8 +70,6 @@ module.exports = {
             const deleteOneUser = await User.findOneAndDelete(
                 { _id: req.params.userId },                
             )
-
-            console.log (deleteOneUser)
             if (!deleteOneUser) {
                 return res.status(404).json({ message: 'User ID not found' });
             } else {
@@ -80,7 +78,7 @@ module.exports = {
                 const deleteAllThoughts = await Thought.deleteMany({ _id: { $in: deleteOneUser.thoughts }});
             }
 
-            res.json({deleteOneUser, deleteAllThoughts, message: "User and Thoughts Deleted"});
+            res.json({message: "User and Thoughts Deleted"});
         } catch (err) {
             res.status(500).json(err);
         }
