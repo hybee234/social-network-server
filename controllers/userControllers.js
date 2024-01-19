@@ -77,7 +77,7 @@ module.exports = {
                 console.log ("User ID found - assessing thoughts)")
                 const deleteAllThoughts = await Thought.deleteMany({ _id: { $in: deleteOneUser.thoughts }});
             }
-
+            // TODO: ADD STEPS TO ALSO REMOVE THOUGHT ID FROM USER
             res.json({message: "User and Thoughts Deleted"});
         } catch (err) {
             res.status(500).json(err);
